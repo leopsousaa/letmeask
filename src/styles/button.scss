@@ -20,7 +20,7 @@
     margin-right: 8px;
   }
 
-  &:not(disabled):hover {
+  &:not(:disabled):hover {
     filter: brightness(0.9);
   }
 
