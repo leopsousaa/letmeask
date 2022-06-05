@@ -6,7 +6,7 @@ import logo from "../assets/images/logo.svg";
 
 import { Button } from "../components/Button";
 import { database } from "../services/firebase";
-import { ref, set, push } from "firebase/database";
+import { ref, push } from "firebase/database";
 
 import { useAuth } from "../hook/useAuth";
 
