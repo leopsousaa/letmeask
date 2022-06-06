@@ -11,7 +11,7 @@ import "./styles.scss";
 
 import { Button } from "../../components/Button";
 
-import { ref, get } from "firebase/database";
+import { ref, get, onValue } from "firebase/database";
 import { database } from "../../services/firebase";
 
 export function Home() {
@@ -43,7 +43,17 @@ export function Home() {
       return;
     }
 
-    navigate(`/rooms/${roomCode}`);
+    onValue(roomRef, (value) => {
+      const databaseRoom = value.val();
+
+      if (databaseRoom.endedAt) {
+        alert("Room already closed.");
+
+        return;
+      } else {
+        navigate(`/rooms/${roomCode}`);
+      }
+    });
   }
 
   return (
@@ -69,8 +79,6 @@ export function Home() {
           <form onSubmit={handleJoinRoom}>
             <input
               type="text"
-              name=""
-              id=""
               placeholder="Digite o código da sala"
               onChange={(event) => setRoomCode(event.target.value)}
               value={roomCode}
